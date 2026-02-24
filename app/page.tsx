@@ -92,7 +92,8 @@ export default function Page() {
       <div className="flex flex-col items-start bg-[#faf7f2]">
         {/* Hero Section */}
         <div className="w-full h-[400px] md:h-[550px] lg:h-[720px] 2xl:h-[850px] relative overflow-hidden">
-          <div className="w-full h-full bg-[url('/images/hero-banner.png')] bg-cover bg-center absolute top-0 left-0" />
+          {/* Mobile: hero-mobile.png, Desktop: hero-banner.png */}
+          <div className="w-full h-full bg-[url('/images/hero-banner-mobile.png')] md:bg-[url('/images/hero-banner.png')] bg-cover bg-center absolute top-0 left-0" />
           <div className="w-full h-full bg-[rgba(0,0,0,0.4)] absolute top-0 left-0 z-[10]" />
           <div className="flex w-full h-full justify-center items-center relative z-[20] px-6">
             <div className="text-center">
@@ -171,7 +172,8 @@ export default function Page() {
 
             {/* Subscribe Banner */}
             <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#3a2a21]">
-              <div className="absolute inset-0 bg-[url('/images/subscribe-save.png')] bg-cover" />
+              {/* Mobile: subscribe-mobile.png, Desktop: subscribe-save.png */}
+              <div className="absolute inset-0 bg-[url('/images/subscribe-save-mobile.png')] md:bg-[url('/images/subscribe-save.png')] bg-cover" />
               <div className="absolute inset-0 bg-black/30" />
               <div className="relative h-full flex items-center px-6 md:pl-12">
                 <div>
@@ -185,7 +187,7 @@ export default function Page() {
 
             {/* Perfect Your Brew Banner */}
             <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#4a4a4a]">
-              <div className="absolute inset-0 bg-[url('/images/perfect-brew.png')] bg-cover" />
+              <div className="absolute inset-0 bg-[url('/images/perfect-brew-mobile.png')] md:bg-[url('/images/perfect-brew.png')] bg-cover" />
               <div className="absolute inset-0 bg-black/40" />
               <div className="relative h-full flex items-center justify-start md:justify-end px-6 md:pr-12 text-left md:text-right">
                 <div>
@@ -198,7 +200,7 @@ export default function Page() {
 
             {/* Curated Gift Sets Banner */}
             <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#5c2433]">
-              <div className="absolute inset-0 bg-[url('/images/curated-gift.png')] bg-cover" />
+              <div className="absolute inset-0 bg-[url('/images/curated-gift-mobile.png')] md:bg-[url('/images/curated-gift.png')] bg-cover" />
               <div className="absolute inset-0 bg-[rgba(128,49,68,0.5)]" />
               <div className="relative h-full flex items-center justify-center text-center px-6">
                 <div>
