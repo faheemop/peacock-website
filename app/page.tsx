@@ -90,7 +90,7 @@ export default function Page() {
       <div className="flex flex-col items-start bg-[#faf7f2]">
         {/* Hero Section */}
         <div className="w-full h-[400px] md:h-[550px] lg:h-[720px] 2xl:h-[850px] relative overflow-hidden">
-          <div className="w-full h-full bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2026-02-20/diM2gCLnBz.png)] bg-cover bg-center absolute top-0 left-0" />
+          <div className="w-full h-full bg-[url('/images/hero-banner.png')] bg-cover bg-center absolute top-0 left-0" />
           <div className="w-full h-full bg-[rgba(0,0,0,0.4)] absolute top-0 left-0 z-[10]" />
           <div className="flex w-full h-full justify-center items-center relative z-[20] px-6">
             <div className="text-center">
@@ -103,9 +103,11 @@ export default function Page() {
 
         {/* Best Sellers */}
         <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto mt-12 md:mt-20 px-6 2xl:px-12 mb-12 md:mb-20">
-          <div className="flex justify-between items-center mb-8 md:mb-12">
+          <div className="flex flex-col md:flex-row justify-between md:items-center mb-8 md:mb-12">
             <h2 className="text-2xl md:text-[36px] text-[#803144] font-['Inter']">Our Best Sellers</h2>
-            <div className="flex gap-2">
+
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex gap-2">
               <button
                 onClick={() => scrollSlider('prev')}
                 className="w-10 h-10 rounded-full border border-[#803144] flex items-center justify-center text-[#803144] hover:bg-[#803144] hover:text-white transition-colors"
@@ -121,7 +123,26 @@ export default function Page() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
             </div>
+
+            {/* Mobile Buttons Row */}
+            <div className="flex md:hidden justify-between w-full mt-4">
+              <button
+                onClick={() => scrollSlider('prev')}
+                className="w-10 h-10 rounded-full border border-[#803144] flex items-center justify-center text-[#803144]"
+                aria-label="Previous"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              </button>
+              <button
+                onClick={() => scrollSlider('next')}
+                className="w-10 h-10 rounded-full border border-[#803144] flex items-center justify-center text-[#803144]"
+                aria-label="Next"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
+            </div>
           </div>
+
           <div ref={sliderRef} className="flex gap-6 overflow-x-hidden scroll-smooth">
             {[
               { name: "Ethiopian Yirgacheffe", img: "0CxVksT2fv.png" },
@@ -147,7 +168,7 @@ export default function Page() {
 
           {/* Subscribe Banner */}
           <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#3a2a21]">
-            <div className="absolute inset-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2026-02-20/VpGEKKTkWi.png)] bg-cover" />
+            <div className="absolute inset-0 bg-[url('/images/subscribe-save.png')] bg-cover" />
             <div className="absolute inset-0 bg-black/30" />
             <div className="relative h-full flex items-center px-6 md:pl-12">
               <div>
@@ -161,7 +182,7 @@ export default function Page() {
 
           {/* Perfect Your Brew Banner */}
           <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#4a4a4a]">
-            <div className="absolute inset-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2026-02-20/2GrPDqx0Mh.png)] bg-cover" />
+            <div className="absolute inset-0 bg-[url('/images/perfect-brew.png')] bg-cover" />
             <div className="absolute inset-0 bg-black/40" />
             <div className="relative h-full flex items-center justify-start md:justify-end px-6 md:pr-12 text-left md:text-right">
               <div>
@@ -174,7 +195,7 @@ export default function Page() {
 
           {/* Curated Gift Sets Banner */}
           <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#5c2433]">
-            <div className="absolute inset-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2026-02-20/icqOrXYesM.png)] bg-cover" />
+            <div className="absolute inset-0 bg-[url('/images/curated-gift.png')] bg-cover" />
             <div className="absolute inset-0 bg-[rgba(128,49,68,0.5)]" />
             <div className="relative h-full flex items-center justify-center text-center px-6">
               <div>

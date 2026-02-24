@@ -3,7 +3,11 @@ module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ['var(--font-inter)', 'sans-serif'],
+      },
+    },
   },
   variants: {
     extend: {},
