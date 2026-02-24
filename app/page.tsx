@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -14,7 +15,10 @@ export default function Page() {
             </span>
           </div>
           <div className="flex w-[413.219px] h-[24px] gap-[32px] items-center shrink-0 flex-nowrap relative z-[168]">
-            {["Shop", "Visit Us", "About", "Subscription", "Contact"].map((item) => (
+            <Link href="/shop" className="font-['Inter'] text-[16px] font-normal leading-[24px] text-[#364153] cursor-pointer hover:text-[#803144] transition-colors">
+              Shop
+            </Link>
+            {["Visit Us", "About", "Subscription", "Contact"].map((item) => (
               <span key={item} className="font-['Inter'] text-[16px] font-normal leading-[24px] text-[#364153] cursor-pointer">
                 {item}
               </span>
@@ -37,7 +41,7 @@ export default function Page() {
           <div className="w-full h-full bg-[rgba(0,0,0,0.4)] absolute top-0 left-0 z-[10]" />
           <div className="flex w-full h-full justify-center items-center relative z-[20]">
             <div className="text-center">
-              <h1 className="text-[72px] font-['Inter'] text-white leading-tight">Craft Coffee, <br/> Delivered Fresh</h1>
+              <h1 className="text-[72px] font-['Inter'] text-white leading-tight">Craft Coffee, <br /> Delivered Fresh</h1>
               <p className="text-[20px] text-[#e5e7eb] mt-6 max-w-[614px] mx-auto">Discover exceptional single-origin beans roasted to perfection. Elevate your daily ritual with our premium coffee selection.</p>
               <button className="mt-8 px-10 py-4 bg-[#803144] text-white rounded-full text-[16px]">Explore Collection</button>
             </div>
@@ -69,7 +73,7 @@ export default function Page() {
 
         {/* PROMOTION BANNERS SECTION */}
         <div className="flex w-[1536px] flex-col gap-[32px] items-center bg-[#faf7f2] pb-[80px]">
-          
+
           {/* Subscribe Banner */}
           <div className="h-[300px] w-[1232px] rounded-[24px] relative overflow-hidden bg-[#3a2a21]">
             <div className="absolute inset-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2026-02-20/VpGEKKTkWi.png)] bg-cover" />
