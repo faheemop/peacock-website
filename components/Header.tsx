@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 export default function Header() {
@@ -18,24 +19,31 @@ export default function Header() {
 
                     {/* Mobile cart + menu */}
                     <div className="flex md:hidden items-center gap-2">
-                        <div className="w-[40px] h-[40px] relative">
-                            <div className="flex w-[20px] h-[20px] justify-center items-center bg-[#803144] rounded-full absolute -top-1 -right-1 z-[182]">
-                                <span className="text-[12px] text-[#fff]">3</span>
-                            </div>
-                            <div className="w-[24px] h-[24px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2026-02-20/MGLUH6DTE3.png)] bg-cover mt-2 ml-2" />
+                        <div style={{ position: 'relative', width: '22px', height: '22px', margin: '9px' }}>
+                            <ShoppingCart size={22} className="text-[#803144]" />
+                            <span style={{
+                                position: 'absolute',
+                                top: 0,
+                                right: 0,
+                                transform: 'translate(50%, -50%)',
+                                width: '17px',
+                                height: '17px',
+                                backgroundColor: '#803144',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                zIndex: 10,
+                            }}>
+                                <span style={{ fontSize: '9px', fontWeight: 'bold', color: 'white', lineHeight: 1 }}>3</span>
+                            </span>
                         </div>
                         <button
                             className="w-[40px] h-[40px] flex items-center justify-center text-[#803144]"
                             onClick={() => setMenuOpen(!menuOpen)}
                             aria-label="Toggle menu"
                         >
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                {menuOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                )}
-                            </svg>
+                            {menuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
 
@@ -53,10 +61,25 @@ export default function Header() {
 
                     {/* Cart icon */}
                     <div className="w-[40px] h-[40px] relative hidden md:flex items-center justify-center">
-                        <div className="flex w-[20px] h-[20px] justify-center items-center bg-[#803144] rounded-full absolute -top-1 -right-1 z-[182]">
-                            <span className="text-[12px] text-[#fff]">3</span>
+                        <div style={{ position: 'relative', width: '22px', height: '22px', margin: '9px' }}>
+                            <ShoppingCart size={22} className="text-[#803144]" />
+                            <span style={{
+                                position: 'absolute',
+                                top: 0,
+                                right: 0,
+                                transform: 'translate(50%, -50%)',
+                                width: '17px',
+                                height: '17px',
+                                backgroundColor: '#803144',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                zIndex: 10,
+                            }}>
+                                <span style={{ fontSize: '9px', fontWeight: 'bold', color: 'white', lineHeight: 1 }}>3</span>
+                            </span>
                         </div>
-                        <div className="w-[24px] h-[24px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2026-02-20/MGLUH6DTE3.png)] bg-cover mt-2 ml-2" />
                     </div>
                 </div>
 
