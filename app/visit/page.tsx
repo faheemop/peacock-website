@@ -179,9 +179,9 @@ export default function Main() {
                     </div>
 
                     {/* Footer CTA - Background Gradient class from tailwind.config */}
-                    <div className="w-full py-16 md:py-[80px] bg-visit-gradient flex flex-col items-center px-4">
+                    <div className="w-full py-16 md:py-[80px] bg-[linear-gradient(180deg,#803144_0%,#6B2838_100%)] flex flex-col items-center px-4">
                         <h2 className="text-[32px] md:text-[48px] font-normal leading-tight text-[#fff] tracking-[0.35px] text-center">Can't Visit In Person?</h2>
-                        <p className="text-[18px] md:text-[20px] text-[rgba(255,255,255,0.9)] mt-6 text-center max-w-lg">Get our premium coffee delivered straight to your door</p>
+                        <p className="text-[18px] md:text-[20px] text-[rgba(255,255,255,0.9)] mt-6 text-center max-w-xl">Get our premium coffee delivered straight to your door</p>
                         <button className="mt-10 px-10 py-4 bg-[#fff] hover:bg-gray-100 transition-colors rounded-full text-[#803144] text-[18px] font-medium shadow-lg">
                             Shop Online
                         </button>

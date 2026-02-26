@@ -1,15 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         inter: ['var(--font-inter)', 'sans-serif'],
       },
-      // Gradient yahan add kar diya gaya hai
+      colors: {
+        'social-bg': '#8D4657',
+        'social-bg-hover': '#995B6A',
+      },
       backgroundImage: {
-        'visit-gradient': 'linear-gradient(180deg, #803144 0%, #6B2838 100%)',
+        'visit-gradient': 'linear-gradient(180deg, #803144 0%, #B2838 100%)',
       },
     },
   },

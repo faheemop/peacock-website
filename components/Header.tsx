@@ -1,102 +1,174 @@
 "use client";
 
-import React, { useState } from "react";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ShoppingCart, Menu, X } from "lucide-react";
+
+const navLinks = [
+    { label: "Shop", href: "/shop" },
+    { label: "Visit Us", href: "/visit" },
+    { label: "About", href: "#" },
+    { label: "Subscription", href: "#" },
+    { label: "Contact", href: "#" },
+];
 
 export default function Header() {
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [open, setOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Scroll lock
+    useEffect(() => {
+        document.body.style.overflow = open ? "hidden" : "";
+        return () => { document.body.style.overflow = ""; };
+    }, [open]);
 
     return (
-        <div className="w-full bg-[#faf7f2] border-solid border-t border-t-[#e5e7eb] relative z-[163]">
-            <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-6 2xl:px-12 py-4 flex flex-col">
-                <div className="flex justify-between items-center self-stretch shrink-0 flex-nowrap relative z-[164]">
-                    <div className="flex items-center shrink-0 flex-nowrap relative z-[165]">
-                        <span className="text-[24px] font-normal leading-[32px] text-[#803144] tracking-[-0.53px]">
-                            Peacock
-                        </span>
-                    </div>
+        <>
+            {/* ════════════════════ HEADER BAR ════════════════════ */}
+            <header className="w-full bg-[#faf7f2] border-b border-[#e5e7eb] sticky top-0 z-[400]">
+                <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-6 2xl:px-12 py-4 flex items-center justify-between">
 
-                    {/* Mobile cart + menu */}
-                    <div className="flex md:hidden items-center gap-2">
-                        <div style={{ position: 'relative', width: '22px', height: '22px', margin: '9px' }}>
-                            <ShoppingCart size={22} className="text-[#803144]" />
-                            <span style={{
-                                position: 'absolute',
-                                top: 0,
-                                right: 0,
-                                transform: 'translate(50%, -50%)',
-                                width: '17px',
-                                height: '17px',
-                                backgroundColor: '#803144',
-                                borderRadius: '50%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                zIndex: 10,
-                            }}>
-                                <span style={{ fontSize: '9px', fontWeight: 'bold', color: 'white', lineHeight: 1 }}>3</span>
-                            </span>
-                        </div>
-                        <button
-                            className="w-[40px] h-[40px] flex items-center justify-center text-[#803144]"
-                            onClick={() => setMenuOpen(!menuOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
+                    {/* Logo */}
+                    <Link href="/" className="text-[24px] font-semibold text-[#803144] tracking-tight shrink-0">
+                        Peacock
+                    </Link>
 
                     {/* Desktop Nav */}
-                    <div className="hidden md:flex gap-8 items-center flex-nowrap relative z-[168]">
-                        <Link href="/shop" className="text-[16px] font-normal leading-[24px] text-[#364153] cursor-pointer hover:text-[#803144] transition-colors">
-                            Shop
-                        </Link>
-                        {["Visit Us", "About", "Subscription", "Contact"].map((item) => (
-                            <span key={item} className="text-[16px] font-normal leading-[24px] text-[#364153] cursor-pointer">
-                                {item}
-                            </span>
+                    <nav className="hidden md:flex gap-8 items-center">
+                        {navLinks.map((link) => (
+                            <Link key={link.href} href={link.href}
+                                className={`text-[16px] font-normal transition-colors ${pathname === link.href
+                                    ? "text-[#803144]"
+                                    : "text-[#364153] hover:text-[#803144]"
+                                    }`}>
+                                {link.label}
+                            </Link>
                         ))}
-                    </div>
+                    </nav>
 
-                    {/* Cart icon */}
+                    {/* Desktop Cart */}
                     <div className="w-[40px] h-[40px] relative hidden md:flex items-center justify-center">
-                        <div style={{ position: 'relative', width: '22px', height: '22px', margin: '9px' }}>
+                        <div style={{ position: 'relative', display: 'inline-flex' }}>
                             <ShoppingCart size={22} className="text-[#803144]" />
                             <span style={{
-                                position: 'absolute',
-                                top: 0,
-                                right: 0,
+                                position: 'absolute', top: 0, right: 0,
                                 transform: 'translate(50%, -50%)',
-                                width: '17px',
-                                height: '17px',
-                                backgroundColor: '#803144',
-                                borderRadius: '50%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                zIndex: 10,
+                                width: 17, height: 17,
+                                backgroundColor: '#803144', borderRadius: '50%',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
                             }}>
-                                <span style={{ fontSize: '9px', fontWeight: 'bold', color: 'white', lineHeight: 1 }}>3</span>
+                                <span style={{ fontSize: 9, fontWeight: 700, color: '#fff', lineHeight: 1 }}>3</span>
                             </span>
                         </div>
                     </div>
+
+                    {/* Mobile: Cart + Hamburger */}
+                    <div className="flex md:hidden items-center gap-1">
+                        {/* Mobile Cart */}
+                        <div className="w-10 h-10 flex items-center justify-center">
+                            <div style={{ position: 'relative', display: 'inline-flex' }}>
+                                <ShoppingCart size={22} className="text-[#803144]" />
+                                <span style={{
+                                    position: 'absolute', top: 0, right: 0,
+                                    transform: 'translate(50%, -50%)',
+                                    width: 17, height: 17,
+                                    backgroundColor: '#803144', borderRadius: '50%',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                }}>
+                                    <span style={{ fontSize: 9, fontWeight: 700, color: '#fff', lineHeight: 1 }}>3</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Hamburger */}
+                        <button
+                            onClick={() => setOpen(true)}
+                            aria-label="Open menu"
+                            className="w-10 h-10 flex items-center justify-center text-[#803144]"
+                        >
+                            <Menu size={26} />
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            {/* ════════════════════ BACKDROP ════════════════════
+                Clicking backdrop closes the drawer
+            ══════════════════════════════════════════════════ */}
+            <div
+                aria-hidden="true"
+                onClick={() => setOpen(false)}
+                style={{
+                    position: 'fixed', inset: 0,
+                    zIndex: 998,
+                    backgroundColor: 'rgba(0,0,0,0.45)',
+                    transition: 'opacity 0.35s ease',
+                    opacity: open ? 1 : 0,
+                    pointerEvents: open ? 'auto' : 'none',
+                }}
+            />
+
+            {/* ════════════════════ SIDE DRAWER ════════════════════ */}
+            <div
+                role="dialog"
+                aria-modal="true"
+                style={{
+                    position: 'fixed',
+                    top: 0, right: 0,
+                    height: '100dvh',
+                    width: '65%',
+                    maxWidth: '380px',
+                    zIndex: 999,
+                    backgroundColor: '#ffffff',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    transform: open ? 'translateX(0)' : 'translateX(100%)',
+                    transition: 'transform 0.35s ease',
+                    boxShadow: '-2px 0 20px rgba(0,0,0,0.12)',
+                }}
+                className="md:hidden"
+            >
+                {/* Top bar: X close button — right */}
+                <div style={{ padding: '18px 20px', display: 'flex', justifyContent: 'flex-end' }}>
+                    <button
+                        onClick={() => setOpen(false)}
+                        aria-label="Close menu"
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: '#803144' }}
+                    >
+                        <X size={22} />
+                    </button>
                 </div>
 
-                {/* Mobile Nav Dropdown */}
-                {menuOpen && (
-                    <div className="md:hidden flex flex-col gap-4 py-4 w-full">
-                        <Link href="/shop" className="text-[16px] font-normal leading-[24px] text-[#364153] cursor-pointer hover:text-[#803144] transition-colors">
-                            Shop
-                        </Link>
-                        {["Visit Us", "About", "Subscription", "Contact"].map((item) => (
-                            <span key={item} className="text-[16px] font-normal leading-[24px] text-[#364153] cursor-pointer">
-                                {item}
-                            </span>
-                        ))}
-                    </div>
-                )}
+                {/* Nav Links — with separator lines */}
+                <nav style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+                    {navLinks.map((link) => {
+                        const active = pathname === link.href;
+                        return (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                onClick={() => setOpen(false)}
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'flex-start',
+                                    alignItems: 'center',
+                                    padding: '16px 24px',
+                                    borderBottom: '1px solid #f0f0f0',
+                                    textDecoration: 'none',
+                                    color: active ? '#803144' : '#364153',
+                                    fontWeight: active ? 600 : 400,
+                                    fontSize: '1rem',
+                                    transition: 'color 0.2s',
+                                }}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
+                </nav>
             </div>
-        </div>
+        </>
     );
 }
+

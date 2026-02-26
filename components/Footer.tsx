@@ -4,9 +4,9 @@ import { Instagram, Facebook, Twitter, Mail } from "lucide-react";
 
 export default function Footer() {
     return (
-        <div className="w-full bg-[#803144] pt-12 md:pt-[80px] pb-[40px]">
+        <div className="w-full bg-[#803144]  pb-[40px]">
             <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-6 2xl:px-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-4 gap-8 md:gap-[40px] mb-10 md:mb-[60px] ]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-4 gap-0 md:gap-[40px] mb-10 md:mb-[60px]">
                     {/* Column 1 */}
                     <div className="flex flex-col gap-4 mt-16 md:mt-[60px]">
                         <h4 className="text-white font-semibold text-[16px]">Company</h4>
@@ -30,7 +30,7 @@ export default function Footer() {
                     </div>
 
                     {/* Column 3 */}
-                    <div className="flex flex-col gap-4 mt-16 md:mt-[60px]  ">
+                    <div className="flex flex-col gap-4 mt-16 md:mt-[60px]">
                         <h4 className="text-white font-semibold text-[16px]">Support</h4>
                         <div className="flex flex-col gap-3 text-[#e5e7eb] text-[14px]">
                             <Link href="#" className="hover:text-white transition-colors">Contact Us</Link>
@@ -41,21 +41,21 @@ export default function Footer() {
                     </div>
 
                     {/* Column 4 */}
-                    <div className="flex flex-col gap-4 mt-16 md:mt-[60px]  ">
+                    <div className="flex flex-col gap-4 mt-16 md:mt-[60px]">
                         <h4 className="text-white font-semibold text-[16px]">Connect</h4>
                         <span className="text-[#e5e7eb] text-[14px]">Follow us on social media</span>
                         <div className="flex gap-3 mt-2">
-                            {/* Lucide Icons used here */}
-                            <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-full hover:bg-white/20 cursor-pointer transition-all">
+                            {/* bg-social-bg aur hover:bg-social-bg-hover ab solid colors use karenge */}
+                            <div className="w-[36px] h-[36px] flex items-center justify-center bg-social-bg rounded-full hover:bg-social-bg-hover cursor-pointer transition-all relative z-10">
                                 <Instagram size={18} className="text-white" />
                             </div>
-                            <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-full hover:bg-white/20 cursor-pointer transition-all">
+                            <div className="w-[36px] h-[36px] flex items-center justify-center bg-social-bg rounded-full hover:bg-social-bg-hover cursor-pointer transition-all relative z-10">
                                 <Facebook size={18} className="text-white" />
                             </div>
-                            <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-full hover:bg-white/20 cursor-pointer transition-all">
+                            <div className="w-[36px] h-[36px] flex items-center justify-center bg-social-bg rounded-full hover:bg-social-bg-hover cursor-pointer transition-all relative z-10">
                                 <Twitter size={18} className="text-white" />
                             </div>
-                            <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-full hover:bg-white/20 cursor-pointer transition-all">
+                            <div className="w-[36px] h-[36px] flex items-center justify-center bg-social-bg rounded-full hover:bg-social-bg-hover cursor-pointer transition-all relative z-10">
                                 <Mail size={18} className="text-white" />
                             </div>
                         </div>
@@ -63,9 +63,9 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/20 pt-10">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/20 pt-4">
                     <p className="text-[#e5e7eb] text-[14px]">© 2025 Coffee Corps. All rights reserved.</p>
-                    <div className="flex gap-4 md:gap-6 text-[#e5e7eb] text-[14px] pb-4 ">
+                    <div className="flex gap-4 md:gap-6 text-[#e5e7eb] text-[14px] ">
                         <Link href="#" className="cursor-pointer hover:text-white transition-colors">Privacy Policy</Link>
                         <Link href="#" className="cursor-pointer hover:text-white transition-colors">Terms of Service</Link>
                         <Link href="#" className="cursor-pointer hover:text-white transition-colors">Cookie Policy</Link>
