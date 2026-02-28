@@ -1,145 +1,163 @@
-"use client";
+import { Metadata } from "next";
+import Image from "next/image";
+import BestSellersSlider from "@/components/BestSellersSlider";
 
-import React, { useRef } from "react";
+export const metadata: Metadata = {
+  title: "Peacock Coffee — Craft Coffee, Delivered Fresh",
+  description: "Discover exceptional single-origin beans roasted to perfection. Elevate your daily ritual with our premium coffee selection.",
+};
 
-export default function Page() {
-  const sliderRef = useRef<HTMLDivElement>(null);
+interface PromoBanner {
+  bgDesktop: string;
+  bgMobile: string;
+  badge?: string;
+  heading: string;
+  body: string;
+  cta: string;
+  ctaStyle: "dark" | "light" | "white";
+  align: "left" | "right" | "center";
+  overlay: string;
+}
 
-  const scrollSlider = (direction: 'prev' | 'next') => {
-    const container = sliderRef.current;
-    if (!container) return;
-    const card = container.querySelector('div') as HTMLElement;
-    if (!card) return;
-    const scrollAmount = card.offsetWidth + 24; // card width + gap-6 (24px)
-    container.scrollBy({ left: direction === 'next' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
-  };
+const promoBanners: PromoBanner[] = [
+  {
+    bgDesktop: "/images/subscribe-save.png",
+    bgMobile: "/images/subscribe-save-mobile.png",
+    badge: "Save 20%",
+    heading: "Subscribe & Save",
+    body: "Never run out of your favorite coffee. Get fresh beans delivered monthly.",
+    cta: "Start Subscription",
+    ctaStyle: "dark",
+    align: "left",
+    overlay: "bg-black/30",
+  },
+  {
+    bgDesktop: "/images/perfect-brew.png",
+    bgMobile: "/images/perfect-brew-mobile.png",
+    heading: "Perfect Your Brew",
+    body: "Learn professional brewing techniques from our expert baristas.",
+    cta: "View Brewing Guide",
+    ctaStyle: "dark",
+    align: "right",
+    overlay: "bg-black/40",
+  },
+  {
+    bgDesktop: "/images/curated-gift.png",
+    bgMobile: "/images/curated-gift-mobile.png",
+    heading: "Curated Gift Sets",
+    body: "Premium coffee collections beautifully packaged for any occasion.",
+    cta: "Shop Gifts",
+    ctaStyle: "white",
+    align: "center",
+    overlay: "bg-[#803144]/50",
+  },
+];
 
+export default function HomePage() {
   return (
-    <div className="main-container w-full bg-[#fff] relative mx-auto my-0">
-      {/* Main Content Area */}
+    <div className="w-full bg-white">
       <div className="flex flex-col items-start bg-[#faf7f2]">
-        {/* Hero Section */}
-        <div className="w-full h-[400px] md:h-[550px] lg:h-[720px] 2xl:h-[850px] relative overflow-hidden">
-          {/* Mobile: hero-mobile.png, Desktop: hero-banner.png */}
-          <div className="w-full h-full bg-[url('/images/hero-banner-mobile.png')] md:bg-[url('/images/hero-banner.png')] bg-cover bg-center absolute top-0 left-0" />
-          <div className="w-full h-full bg-[rgba(0,0,0,0.4)] absolute top-0 left-0 z-[10]" />
-          <div className="flex w-full h-full justify-center items-center relative z-[20] px-6">
-            <div className="text-center">
-              <h1 className="text-3xl md:text-5xl lg:text-[72px] 2xl:text-[84px] text-white leading-tight">Craft Coffee, <br /> Delivered Fresh</h1>
-              <p className="text-base md:text-lg lg:text-xl 2xl:text-2xl text-[#e5e7eb] mt-4 md:mt-6 max-w-[614px] 2xl:max-w-[750px] mx-auto">Discover exceptional single-origin beans roasted to perfection. Elevate your daily ritual with our premium coffee selection.</p>
-              <button className="mt-6 md:mt-8 px-8 md:px-10 py-3 md:py-4 bg-[#803144] text-white rounded-full text-[14px] md:text-[16px] 2xl:text-[18px]">Explore Collection</button>
+
+        {/* ── Hero ─────────────────────────────────────────────── */}
+        <section className="w-full h-[400px] md:h-[550px] lg:h-[720px] 2xl:h-[850px] relative overflow-hidden">
+          {/* Desktop */}
+          <Image
+            src="/images/hero-banner.png"
+            alt="Craft Coffee Delivered Fresh"
+            fill
+            priority
+            className="object-cover hidden md:block"
+          />
+          {/* Mobile */}
+          <Image
+            src="/images/hero-banner-mobile.png"
+            alt="Craft Coffee Delivered Fresh"
+            fill
+            priority
+            className="object-cover block md:hidden"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/40" />
+          {/* Content */}
+          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+            <div>
+              <h1 className="text-3xl md:text-5xl lg:text-[72px] 2xl:text-[84px] text-white leading-tight">
+                Craft Coffee, <br /> Delivered Fresh
+              </h1>
+              <p className="text-base md:text-lg lg:text-xl 2xl:text-2xl text-[#e5e7eb] mt-4 md:mt-6 max-w-[614px] 2xl:max-w-[750px] mx-auto">
+                Discover exceptional single-origin beans roasted to perfection. Elevate your daily ritual with our premium coffee selection.
+              </p>
+              <button className="mt-6 md:mt-8 px-8 md:px-10 py-3 md:py-4 bg-[#803144] text-white rounded-full text-[14px] md:text-[16px] 2xl:text-[18px] hover:bg-[#6a2b3c] transition-colors">
+                Explore Collection
+              </button>
             </div>
+          </div>
+        </section>
+
+        {/* ── Best Sellers Slider (Client Component) ───────────── */}
+        <BestSellersSlider />
+
+        {/* ── Promo Banners ─────────────────────────────────────── */}
+        <div className="w-full bg-[#faf7f2] pb-12 md:pb-20">
+          <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-6 2xl:px-12 flex flex-col gap-6 md:gap-8">
+
+            {promoBanners.map((banner, i) => {
+              const alignClass =
+                banner.align === "right"
+                  ? "justify-start md:justify-end px-6 md:pr-12 text-left md:text-right"
+                  : banner.align === "center"
+                    ? "justify-center text-center px-6"
+                    : "justify-start px-6 md:pl-12";
+
+              return (
+                <div
+                  key={i}
+                  className="h-[250px] md:h-[300px] w-full rounded-3xl relative overflow-hidden"
+                >
+                  {/* Desktop bg */}
+                  <Image
+                    src={banner.bgDesktop}
+                    alt={banner.heading}
+                    fill
+                    className="object-cover hidden md:block"
+                  />
+                  {/* Mobile bg */}
+                  <Image
+                    src={banner.bgMobile}
+                    alt={banner.heading}
+                    fill
+                    className="object-cover block md:hidden"
+                  />
+                  {/* Overlay */}
+                  <div className={`absolute inset-0 ${banner.overlay}`} />
+                  {/* Content */}
+                  <div className={`relative h-full flex items-center ${alignClass}`}>
+                    <div>
+                      {banner.badge && (
+                        <span className="bg-[#803144] text-white px-4 py-1 rounded-full text-sm mb-4 inline-block">
+                          {banner.badge}
+                        </span>
+                      )}
+                      <h2 className="text-white text-2xl md:text-4xl mb-3 md:mb-4">{banner.heading}</h2>
+                      <p className="text-[#e5e7eb] text-base md:text-xl max-w-[550px] mb-4 md:mb-6">{banner.body}</p>
+                      <button
+                        className={
+                          banner.ctaStyle === "white"
+                            ? "bg-white text-[#803144] px-8 md:px-10 py-2.5 md:py-3 rounded-full font-medium text-sm md:text-base"
+                            : "bg-[#803144] text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full text-sm md:text-base"
+                        }
+                      >
+                        {banner.cta}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
           </div>
         </div>
 
-        {/* Best Sellers */}
-        <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto mt-12 md:mt-20 px-6 2xl:px-12 mb-12 md:mb-20">
-          <div className="flex flex-col md:flex-row justify-between md:items-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-[36px] text-[#803144]">Our Best Sellers</h2>
-
-            {/* Desktop Buttons */}
-            <div className="hidden md:flex gap-2">
-              <button
-                onClick={() => scrollSlider('prev')}
-                className="w-10 h-10 rounded-full border border-[#803144] flex items-center justify-center text-[#803144] hover:bg-[#803144] hover:text-white transition-colors"
-                aria-label="Previous"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-              </button>
-              <button
-                onClick={() => scrollSlider('next')}
-                className="w-10 h-10 rounded-full border border-[#803144] flex items-center justify-center text-[#803144] hover:bg-[#803144] hover:text-white transition-colors"
-                aria-label="Next"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              </button>
-            </div>
-
-            {/* Mobile Buttons Row */}
-            <div className="flex md:hidden justify-between w-full mt-4">
-              <button
-                onClick={() => scrollSlider('prev')}
-                className="w-10 h-10 rounded-full border border-[#803144] flex items-center justify-center text-[#803144]"
-                aria-label="Previous"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-              </button>
-              <button
-                onClick={() => scrollSlider('next')}
-                className="w-10 h-10 rounded-full border border-[#803144] flex items-center justify-center text-[#803144]"
-                aria-label="Next"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              </button>
-            </div>
-          </div>
-
-          <div ref={sliderRef} className="flex gap-6 overflow-x-hidden scroll-smooth">
-            {[
-              { name: "Ethiopian Yirgacheffe", img: "0CxVksT2fv.png" },
-              { name: "Colombian Supremo", img: "AL6dvbOG2V.png" },
-              { name: "Cold Brew Blend", img: "4PLODtpTGx.png" },
-              { name: "Brazil Santos", img: "uF6jUJGnfk.png" },
-              { name: "Kenyan AA", img: "0CxVksT2fv.png" },
-              { name: "Guatemala Antigua", img: "AL6dvbOG2V.png" }
-            ].map((item, i) => (
-              <div key={i} className="flex-shrink-0 w-[calc((100%-24px)/1.5)] sm:w-[calc((100%-48px)/2.5)] lg:w-[calc((100%-72px)/3.5)] bg-white rounded-2xl shadow-sm border border-transparent overflow-hidden">
-                <div className="h-[250px] md:h-[316px] bg-cover bg-center" style={{ backgroundImage: `url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2026-02-20/${item.img})` }} />
-                <div className="p-6">
-                  <h3 className="text-[18px] md:text-[20px] font-medium">{item.name}</h3>
-                  <p className="text-[#803144] text-[16px] md:text-[18px] mt-2 font-semibold">$24.99</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* PROMOTION BANNERS SECTION */}
-        <div className="w-full bg-[#faf7f2] pb-12 md:pb-[80px]">
-          <div className="w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-6 2xl:px-12 flex flex-col gap-6 md:gap-[32px]">
-
-            {/* Subscribe Banner */}
-            <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#3a2a21]">
-              {/* Mobile: subscribe-mobile.png, Desktop: subscribe-save.png */}
-              <div className="absolute inset-0 bg-[url('/images/subscribe-save-mobile.png')] md:bg-[url('/images/subscribe-save.png')] bg-cover" />
-              <div className="absolute inset-0 bg-black/30" />
-              <div className="relative h-full flex items-center px-6 md:pl-12">
-                <div>
-                  <span className="bg-[#803144] text-white px-4 py-1 rounded-full text-sm mb-4 inline-block">Save 20%</span>
-                  <h2 className="text-white text-2xl md:text-4xl mb-3 md:mb-4">Subscribe & Save</h2>
-                  <p className="text-[#e5e7eb] text-base md:text-xl max-w-[550px] mb-4 md:mb-6">Never run out of your favorite coffee. Get fresh beans delivered monthly.</p>
-                  <button className="bg-[#803144] text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full text-sm md:text-base">Start Subscription</button>
-                </div>
-              </div>
-            </div>
-
-            {/* Perfect Your Brew Banner */}
-            <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#4a4a4a]">
-              <div className="absolute inset-0 bg-[url('/images/perfect-brew-mobile.png')] md:bg-[url('/images/perfect-brew.png')] bg-cover" />
-              <div className="absolute inset-0 bg-black/40" />
-              <div className="relative h-full flex items-center justify-start md:justify-end px-6 md:pr-12 text-left md:text-right">
-                <div>
-                  <h2 className="text-white text-2xl md:text-4xl mb-3 md:mb-4">Perfect Your Brew</h2>
-                  <p className="text-[#e5e7eb] text-base md:text-xl mb-4 md:mb-6">Learn professional brewing techniques from our expert baristas.</p>
-                  <button className="bg-[#803144] text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full text-sm md:text-base">View Brewing Guide</button>
-                </div>
-              </div>
-            </div>
-
-            {/* Curated Gift Sets Banner */}
-            <div className="h-[250px] md:h-[300px] w-full rounded-[24px] relative overflow-hidden bg-[#5c2433]">
-              <div className="absolute inset-0 bg-[url('/images/curated-gift-mobile.png')] md:bg-[url('/images/curated-gift.png')] bg-cover" />
-              <div className="absolute inset-0 bg-[rgba(128,49,68,0.5)]" />
-              <div className="relative h-full flex items-center justify-center text-center px-6">
-                <div>
-                  <h2 className="text-white text-2xl md:text-4xl mb-3 md:mb-4">Curated Gift Sets</h2>
-                  <p className="text-[#f3f4f6] text-base md:text-xl mb-4 md:mb-6">Premium coffee collections beautifully packaged for any occasion.</p>
-                  <button className="bg-white text-[#803144] px-8 md:px-10 py-2.5 md:py-3 rounded-full font-medium text-sm md:text-base">Shop Gifts</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

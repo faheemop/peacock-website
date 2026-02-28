@@ -8,7 +8,7 @@ import { ShoppingCart, Menu, X } from "lucide-react";
 const navLinks = [
     { label: "Shop", href: "/shop" },
     { label: "Visit Us", href: "/visit" },
-    { label: "About", href: "#" },
+    { label: "About", href: "/about" },
     { label: "Subscription", href: "#" },
     { label: "Contact", href: "#" },
 ];
