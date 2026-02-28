@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-export const valuesList = [
+const valuesList = [
     {
         id: 1,
         title: "Passion",
