@@ -67,8 +67,8 @@ export default function AboutPage() {
     });
 
     // Inverse Movement Logic: 
-    // Scroll Down -> Content goes Up (-100)
-    // Scroll Up -> Content goes Down (100)
+    // Scroll Down -> Content and Images go Up (-100)
+    // Scroll Up -> Content and Images go Down (100)
     const contentY = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
     return (
@@ -173,24 +173,29 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* CTA WITH INVERSE SCROLL ANIMATION */}
+            {/* CTA WITH INVERSE SCROLL ANIMATION FOR CONTENT AND IMAGES */}
             <section
                 ref={sectionRef}
                 className="relative py-16 md:py-24 min-h-[400px] overflow-hidden flex items-center"
             >
-                {/* STILL BACKGROUND IMAGES */}
-                <img
-                    src="/images/Container-mobile.png"
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover hidden md:block z-0"
-                />
+                {/* ANIMATED BACKGROUND IMAGES AND OVERLAY */}
+                <motion.div
+                    style={{ y: contentY }}
+                    className="absolute inset-0 z-0 h-[120%] -top-[10%]"
+                >
+                    <img
+                        src="/images/Container-mobile.png"
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover hidden md:block"
+                    />
 
-                <img
-                    src="/images/Container.png"
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover block md:hidden z-0"
-                />
-                <div className="absolute inset-0 z-0" />
+                    <img
+                        src="/images/Container.png"
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover block md:hidden"
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
+                </motion.div>
 
                 {/* ANIMATED CONTENT CONTAINER */}
                 <motion.div
