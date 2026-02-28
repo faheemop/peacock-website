@@ -1,6 +1,9 @@
+"use client";
+
 import { Coffee, Heart, Award, Users, Leaf, Target } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export const valuesList = [
     {
@@ -55,6 +58,19 @@ const socialIcons = [
 ];
 
 export default function AboutPage() {
+    const sectionRef = useRef(null);
+
+    // Scroll progress track karne ke liye logic
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"]
+    });
+
+    // Inverse Movement Logic: 
+    // Scroll Down -> Content goes Up (-100)
+    // Scroll Up -> Content goes Down (100)
+    const contentY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
     return (
         <div className="w-full min-h-screen bg-white">
 
@@ -111,7 +127,7 @@ export default function AboutPage() {
                     </p>
 
                     <p>
-                        Every bean we source tells a story—of farmers who nurture their crops with care, of roasters who perfect their craft, and of baristas who create moments of connection with every cup. We're not just in the business of coffee; we're in the business of creating experiences.
+                        Every bean we source tells a story—of farmers who nurture their crops with care, of roasters who perfect their craft, and of baristas who create moments of connection with every cup. We&apos;re not just in the business of coffee; we&apos;re in the business of creating experiences.
                     </p>
 
                     <p>
@@ -157,25 +173,30 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* CTA */}
+            {/* CTA WITH INVERSE SCROLL ANIMATION */}
             <section
-                className="relative bg-center bg-cover py-16 md:py-24 min-h-[400px]"
+                ref={sectionRef}
+                className="relative py-16 md:py-24 min-h-[400px] overflow-hidden flex items-center"
             >
+                {/* STILL BACKGROUND IMAGES */}
                 <img
                     src="/images/Container-mobile.png"
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover hidden md:block"
+                    className="absolute inset-0 w-full h-full object-cover hidden md:block z-0"
                 />
 
-                {/* Mobile Image (change if you have mobile image) */}
                 <img
                     src="/images/Container.png"
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover block md:hidden"
+                    className="absolute inset-0 w-full h-full object-cover block md:hidden z-0"
                 />
-                <div className="absolute inset-0" />
+                <div className="absolute inset-0 z-0" />
 
-                <div className="relative max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-6 2xl:px-12 text-white space-y-6">
+                {/* ANIMATED CONTENT CONTAINER */}
+                <motion.div
+                    style={{ y: contentY }}
+                    className="relative z-10 max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-6 2xl:px-12 text-white space-y-6 w-full"
+                >
                     <Coffee className="w-10 h-10" />
 
                     <h2 className="text-[30px] leading-[36px] tracking-[0.4px] md:text-[48px] md:leading-[48px] md:tracking-[0.35px] font-normal">
@@ -199,10 +220,8 @@ export default function AboutPage() {
                     <p className="max-w-[680px] text-[14px] leading-[20px] tracking-[-0.15px] font-normal opacity-90">
                         We respect your privacy. Unsubscribe at any time.
                     </p>
-                </div>
+                </motion.div>
             </section>
-
-
         </div>
     );
 }
